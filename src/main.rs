@@ -6,14 +6,14 @@ use std::io::prelude::*;
 struct Punt {
     lat: f32,
     lng: f32,
-    hoogte: f32
+    hoogte: f32,
 }
 
 #[derive(Serialize, Deserialize)]
 struct Rit {
     vertrektijd: u16,
     aankomsttijd: u16,
-    lijn: Vec<Punt>
+    lijn: Vec<Punt>,
 }
 
 fn main() -> std::io::Result<()> {
@@ -25,6 +25,24 @@ fn main() -> std::io::Result<()> {
 
     println!("{}", ritjes[0].lijn[0].hoogte);
 
-    
+    let camera = raylib::camera::Camera3D::perspective(
+        raylib::core::math::Vector3 {
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+        },
+        raylib::core::math::Vector3 {
+            x: 1.0,
+            y: 1.0,
+            z: 1.0,
+        },
+        raylib::core::math::Vector3 {
+            x: 0.0,
+            y: 1.0,
+            z: 0.0,
+        },
+        45.0,
+    );
+
     Ok(())
 }
