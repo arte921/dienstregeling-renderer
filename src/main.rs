@@ -55,11 +55,11 @@ fn main() -> std::io::Result<()> {
     while !rl.window_should_close() {
         let mut d = rl.begin_drawing(&thread);
         
-        // d.clear_background(RAYWHITE);
-        
-        // d.begin_mode_3d(camera);
+        d.clear_background(Color::BLACK);
 
-        d.draw_line_3d(
+        let mut d3 = d.begin_mode3D(camera);
+
+        d3.draw_line_3D(
             Vector3 {
                 x: 2.0,
                 y: 0.0,
@@ -72,8 +72,6 @@ fn main() -> std::io::Result<()> {
             },
             Color::YELLOW
         );
-
-        EndMode3D();
     }
 
     Ok(())
