@@ -1,3 +1,4 @@
+use raylib::prelude::*;
 use serde::{Deserialize, Serialize};
 use std::fs::File;
 use std::io::prelude::*;
@@ -43,6 +44,37 @@ fn main() -> std::io::Result<()> {
         },
         45.0,
     );
+
+    let (mut rl, thread) = raylib::init()
+        .size(640, 480)
+        .title("Dienstregeling")
+        .build();
+    
+    rl.set_target_fps(60);
+    
+    while !rl.window_should_close() {
+        let mut d = rl.begin_drawing(&thread);
+        
+        // d.clear_background(RAYWHITE);
+        
+        // d.begin_mode_3d(camera);
+
+        d.draw_line_3d(
+            Vector3 {
+                x: 2.0,
+                y: 0.0,
+                z: 0.0
+            },
+            Vector3 {
+                x: 2.0,
+                y: 10.0, 
+                z: 0.0
+            },
+            Color::YELLOW
+        );
+
+        EndMode3D();
+    }
 
     Ok(())
 }
