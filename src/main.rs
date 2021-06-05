@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use std::fs::File;
 use std::io::prelude::*;
 
-const HOOGTEFACTOR: f32 = 1.0 / 10.0;
+const HOOGTEFACTOR: f32 = 0.0 / 10.0;
 
 #[derive(Serialize, Deserialize)]
 struct Punt {
@@ -28,18 +28,18 @@ fn main() -> std::io::Result<()> {
 
     println!("{}", ritjes[0].lijn[0].hoogte);
 
-    let mut camera = raylib::camera::Camera3D::perspective(
-        raylib::core::math::Vector3 {
+    let mut camera = Camera3D::perspective(
+        Vector3 {
             x: 4.0,
             y: 50.0,
             z: 720.0 * HOOGTEFACTOR,
         },
-        raylib::core::math::Vector3 {
+        Vector3 {
             x: 4.2,
             y: 51.5,
             z: 720.0 * HOOGTEFACTOR,
         },
-        raylib::core::math::Vector3 {
+        Vector3 {
             x: 0.0,
             y: 0.0,
             z: 1.0,
@@ -62,6 +62,15 @@ fn main() -> std::io::Result<()> {
             let mut d3 = d.begin_mode3D(camera);
 
             d3.update_camera(&mut camera);
+
+            if d3.is_key_down(KeyboardKey::KEY_W) {
+                camera.position.x += 1.0;
+            }
+
+            if d3.is_key_down(KeyboardKey::KEY_A) {
+                camera.position.y -= 1.0;
+            }
+
 
             for rit in &ritjes {
                 let hoeveelheidpunten = rit.lijn.len();
